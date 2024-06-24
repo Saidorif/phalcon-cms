@@ -1,0 +1,44 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTP:Authorization} .+
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{REQUEST_URI} !^public
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+</IfModule>
+
+<IfModule php7_module>
+    php_flag session.cookie_httponly on
+</IfModule>
+php_value session.cookie_httponly 1
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Cache all files for 2 weeks after access (A).
+  ExpiresDefault A1209600
+
+  <FilesMatch \.php$>
+    ExpiresActive Off
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+	<filesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf)$">
+		Header set Cache-Control "max-age=2592000, public"
+	</filesMatch>
+	<filesMatch "\.(css|js)$">
+		Header set Cache-Control "max-age=2592000, public"
+	</filesMatch>
+	<filesMatch "\.(xml|txt)$">
+		Header set Cache-Control "max-age=172800, public, must-revalidate"
+	</filesMatch>
+	<filesMatch "\.(html|htm|php)$">
+		Header set Cache-Control "max-age=172800, private, must-revalidate"
+	</filesMatch>
+</IfModule>
