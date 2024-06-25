@@ -6,7 +6,7 @@
 
 namespace Application\Mvc\Helper;
 
-class Meta extends \Phalcon\Mvc\User\Component
+class Meta extends \Phalcon\Di\Injectable
 {
 
     private static $instance;

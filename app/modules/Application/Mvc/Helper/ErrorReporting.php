@@ -5,7 +5,7 @@
  */
 namespace Application\Mvc\Helper;
 
-class ErrorReporting extends \Phalcon\Mvc\User\Component
+class ErrorReporting extends \Phalcon\Di\Injectable
 {
 
     public function error404()

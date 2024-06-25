@@ -8,12 +8,6 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Menus extends Model
 {
-
-    public function getSource()
-    {
-        return "menu";
-    }
-
     protected $translateModel = 'Menu\Model\Translate\MenusTranslate'; // translate
 
     private $id;
@@ -35,6 +29,7 @@ class Menus extends Model
 
     public function initialize()
     {
+        $this->setSource('menu');
         $this->belongsTo('parent_id', 'Menus\Model\Menus', 'id', ['alias' => 'Parent']);
         $this->hasMany("id", $this->translateModel, "foreign_id");
     }

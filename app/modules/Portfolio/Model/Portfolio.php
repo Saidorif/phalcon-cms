@@ -10,12 +10,6 @@ use Application\Localization\Transliterator;
 
 class Portfolio extends Model
 {
-
-    public function getSource()
-    {
-        return "portfolio";
-    }
-
     public function initialize()
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
@@ -26,6 +20,7 @@ class Portfolio extends Model
         $this->belongsTo('category_id', 'Portfolio\Model\Category', 'id', [
             'alias' => 'category'
         ]);
+        $this->setSource('portfolio');
     }
 
     private $id;

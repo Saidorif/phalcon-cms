@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Faq extends Model
 {
-
-    public function getSource()
-    {
-        return "faq";
-    }
-
     private $id;   
     private $title; // translate     
     public $text; // translate
@@ -26,6 +20,7 @@ class Faq extends Model
 
     public function initialize()
     {
+        $this->setSource('faq');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }    
 

@@ -7,10 +7,9 @@ use Application\Mvc\Model\Model;
 
 class Partner extends Model
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "partner";
+        $this->setSource('partner');
     }
 
     private $id;   

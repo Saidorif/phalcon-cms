@@ -2,10 +2,10 @@
 
 namespace Menu;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 use Menu\Helper\Helper;
 
-class Init extends Component
+class Init extends Injectable
 {
 
     public function __construct()

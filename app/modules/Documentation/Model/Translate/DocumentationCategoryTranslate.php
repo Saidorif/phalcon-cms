@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class DocumentationCategoryTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "documentation_category_translate";
+        $this->setSource('documentation_category_translate');
     }
 
 }

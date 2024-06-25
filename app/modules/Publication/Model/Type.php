@@ -11,11 +11,6 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 class Type extends Model
 {
 
-    public function getSource()
-    {
-        return "publication_type";
-    }
-
     protected $translateModel = 'Publication\Model\Translate\TypeTranslate';
 
     public $id;
@@ -37,6 +32,7 @@ class Type extends Model
 
     public function initialize()
     {
+        $this->setSource('publication_type');
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
 
         $this->hasMany('id', 'Publication\Model\Publication', 'type_id', [

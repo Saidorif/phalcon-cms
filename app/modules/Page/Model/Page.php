@@ -10,12 +10,6 @@ use Application\Localization\Transliterator;
 
 class Page extends Model
 {
-
-    public function getSource()
-    {
-        return "page";
-    }
-
     private $id;
     private $slug;
     private $created_at;
@@ -40,6 +34,7 @@ class Page extends Model
 
     public function initialize()
     {
+        $this->setSource('page');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }
 

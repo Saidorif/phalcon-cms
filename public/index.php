@@ -1,5 +1,4 @@
 <?php
-
 chdir(dirname(__DIR__));
 
 define('ROOT', __DIR__);

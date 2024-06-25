@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class WidgetTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "widget_translate";
+        $this->setSource('widget_translate');
     }
-
 }

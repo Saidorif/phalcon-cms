@@ -2,9 +2,9 @@
 
 namespace Eskiz\Plugin;
 
-use \Phalcon\Mvc\User\Plugin;
+use Phalcon\Di\Injectable;
 
-class Title extends Plugin
+class Title extends Injectable
 {
 
     public function __construct($di)

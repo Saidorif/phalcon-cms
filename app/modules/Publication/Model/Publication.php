@@ -10,12 +10,6 @@ use Application\Localization\Transliterator;
 
 class Publication extends Model
 {
-
-    public function getSource()
-    {
-        return "publication";
-    }
-
     public function initialize()
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
@@ -23,6 +17,8 @@ class Publication extends Model
         $this->belongsTo('type_id', 'Publication\Model\Type', 'id', [
             'alias' => 'type'
         ]);
+
+        $this->setSource('publication');
     }
 
     private $id;

@@ -7,11 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Category extends Model
 {
-    public function getSource()
-    {
-        return "documentation_category";
-    }
-
     private $id;
     private $title; // translate
 
@@ -23,6 +18,7 @@ class Category extends Model
 
     public function initialize()
     {
+        $this->setSource('documentation_category');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
         $this->hasMany("id", 'Documentation\Model\Documentation', "category_id",['alias' => 'documents']);
     }

@@ -4,7 +4,7 @@
 
 namespace Application\Mvc\Helper;
 
-class RequestQuery extends \Phalcon\Mvc\User\Component
+class RequestQuery extends \Phalcon\Di\Injectable
 {
 
     public function getSymbol()

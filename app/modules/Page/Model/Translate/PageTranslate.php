@@ -7,9 +7,9 @@ use Application\Mvc\Model\Translate;
 class PageTranslate extends Translate
 {
 
-    public function getSource()
+    public function initialize()
     {
-        return "page_translate";
+        $this->setSource('page_translate');
     }
 
 }

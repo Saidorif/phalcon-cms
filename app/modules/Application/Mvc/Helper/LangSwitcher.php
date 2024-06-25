@@ -4,7 +4,7 @@
 namespace Application\Mvc\Helper;
 
 use Cms\Model\Language;
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 
 class LangSwitcher extends Component
 {

@@ -6,7 +6,7 @@
 
 namespace Application\Mvc\Helper;
 
-class DbProfiler extends \Phalcon\Mvc\User\Component
+class DbProfiler extends \Phalcon\Di\Injectable
 {
 
     public function DbOutput()

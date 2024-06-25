@@ -8,11 +8,6 @@ use Application\Mvc\Model\Model;
 class Employee extends Model
 {
 
-    public function getSource()
-    {
-        return "employee";
-    }
-
     private $id;   
     private $phone;
     private $email;
@@ -31,6 +26,7 @@ class Employee extends Model
 
     public function initialize()
     {
+        $this->setSource('employee');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }    
 

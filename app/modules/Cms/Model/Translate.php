@@ -8,10 +8,9 @@ use Phalcon\Mvc\Model;
 
 class Translate extends Model
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "translate";
+        $this->setSource('translate');
     }
 
     public $id;

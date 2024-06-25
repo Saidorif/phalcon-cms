@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class SliderTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "slider_translate";
+        $this->setSource('slider_translate');
     }
-
 }

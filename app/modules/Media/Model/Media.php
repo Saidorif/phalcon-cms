@@ -10,14 +10,9 @@ use Application\Localization\Transliterator;
 
 class Media extends Model
 {
-
-    public function getSource()
-    {
-        return "media";
-    }
-
     public function initialize()
     {
+        $this->setSource('media');
         $this->hasMany('id', $this->translateModel, 'foreign_id'); // translate
         $this->hasMany('id', 'Media\Model\Gallery', 'media_id', [
             'alias' => 'gallery'

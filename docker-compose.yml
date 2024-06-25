@@ -1,0 +1,33 @@
+version: "3"
+services:
+  www:
+    build: ./.docker
+    ports:
+      - "8001:80"
+    volumes:
+      - .:/var/www/html
+    links:
+      - db
+    networks:
+      - default
+  db:
+    image: mysql:5.7.13
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: phalcon-cms
+      MYSQL_USER: root
+      MYSQL_PASSWORD: very_secret
+      MYSQL_ROOT_PASSWORD: very_secret
+    volumes:
+      - ./dump:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8000:80
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: very_secret
+      MYSQL_ROOT_PASSWORD: very_secret

@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class PollTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "poll_translate";
+        $this->setSource('poll_translate');
     }
 
 }

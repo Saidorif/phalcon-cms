@@ -7,9 +7,9 @@ use Application\Mvc\Model\Translate;
 class KnowledgeTranslate extends Translate
 {
 
-    public function getSource()
+    public function initialize()
     {
-        return "knowledge_translate";
+        $this->setSource('knowledge_translate');
     }
 
 }

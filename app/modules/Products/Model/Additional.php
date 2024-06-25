@@ -6,13 +6,6 @@ use Application\Mvc\Model\Model;
 
 class Additional extends Model
 {
-
-    public function getSource()
-    {
-        return "products_additional";
-    }
-   
-
     public $id;
     public $product_id;
     public $title; 
@@ -22,6 +15,7 @@ class Additional extends Model
     public function initialize()
     {
         $this->belongsTo('product_id', 'Products\Model\Products', 'id');
+        $this->setSource('products_additional');
     }    
 
     /**

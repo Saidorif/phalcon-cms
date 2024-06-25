@@ -6,7 +6,7 @@
 
 namespace Application\Mvc\Helper;
 
-class Title extends \Phalcon\Mvc\User\Component
+class Title extends \Phalcon\Di\Injectable
 {
 
     private static $instance;

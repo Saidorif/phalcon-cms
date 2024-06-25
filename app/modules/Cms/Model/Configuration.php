@@ -6,11 +6,16 @@ use Phalcon\Mvc\Model\Message;
 
 class Configuration extends \Phalcon\Mvc\Model
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return 'cms_configuration';
+        $this->setSource('cms_configuration');
+        // ....
     }
+
+//    public function getSource()
+//    {
+//        return 'cms_configuration';
+//    }
 
     /**
      * Перечень допустимых ключей конфигурации и их значения по-умолчанию.

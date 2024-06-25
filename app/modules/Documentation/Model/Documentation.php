@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Documentation extends Model
 {
-
-    public function getSource()
-    {
-        return "documentation";
-    }
-
     private $id;
     private $url;
     private $type;
@@ -36,6 +30,7 @@ class Documentation extends Model
 
     public function initialize()
     {
+        $this->setSource('documentation');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
         $this->belongsTo("category_id", 'Documentation\Model\Category', "id");
     }

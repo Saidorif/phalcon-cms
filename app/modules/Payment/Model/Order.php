@@ -10,11 +10,7 @@ class Order extends Model
     {
         $this->hasMany('id', 'Payment\Model\Transaction', 'order_id', ['alias' => 'transactions']);
         $this->belongsTo('member_id', 'Payment\Model\Membership', 'id', ['alias' => 'member']);
-    }
-
-    public function getSource()
-    {
-        return "orders";
+        $this->setSource('orders');
     }
 
 

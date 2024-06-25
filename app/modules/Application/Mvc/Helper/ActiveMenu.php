@@ -6,7 +6,7 @@
 
 namespace Application\Mvc\Helper;
 
-class ActiveMenu extends \Phalcon\Mvc\User\Component
+class ActiveMenu extends \Phalcon\Di\Injectable
 {
 
     private static $instance;

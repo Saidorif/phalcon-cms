@@ -2,9 +2,9 @@
 
 namespace Application\Cache;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 
-class Manager extends Component
+class Manager extends Injectable
 {
     /**
      * Get cache data. If data not exists, generate data and save to cache

@@ -7,10 +7,10 @@
 namespace Eskiz\Plugin;
 
 use Application\Mvc\Helper\CmsCache;
-use Phalcon\Mvc\User\Plugin;
+use Phalcon\Di\Injectable;
 use Phalcon\Mvc\Dispatcher;
 
-class Localization extends Plugin
+class Localization extends Injectable
 {
 
     public function __construct(Dispatcher $dispatcher)
@@ -47,7 +47,8 @@ class Localization extends Plugin
             define('LANG_URL', $defaultLang['url']);
         }
 
+        $interpolatorFactory = new \Phalcon\Translate\InterpolatorFactory();
         $translations = \Cms\Model\Translate::findCachedByLangInArray(LANG);
-        $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray(['content' => $translations]));
+        $this->getDI()->set('translate', new \Phalcon\Translate\Adapter\NativeArray($interpolatorFactory, ['content' => $translations]));
     }
 }

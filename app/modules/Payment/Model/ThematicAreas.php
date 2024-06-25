@@ -12,13 +12,8 @@ class ThematicAreas extends Model
         $this->belongsTo('member_id', 'Payment\Model\Membership', 'id', [
           'alias' => 'thematic_areas'
         ]);
+        $this->setSource('membership_thematic_areas');
     }
-
-    public function getSource()
-    {
-        return "membership_thematic_areas";
-    }
-
     public $id;
     public $member_id;
     public $value;

@@ -9,12 +9,7 @@ class Subscriber extends Model
     //Relationship with Orders
     public function initialize()
     {
-        //
-    }
-
-    public function getSource()
-    {
-        return "magazine_subscribers";
+        $this->setSource('magazine_subscribers');
     }
 
     public $id;

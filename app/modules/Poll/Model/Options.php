@@ -6,13 +6,6 @@ use Application\Mvc\Model\Model;
 
 class Options extends Model
 {
-
-    public function getSource()
-    {
-        return "poll_options";
-    }
-   
-
     public $id;
     public $poll_id;
     public $title;
@@ -22,6 +15,7 @@ class Options extends Model
     public function initialize()
     {
         $this->belongsTo('poll_id', 'Poll\Model\Poll', 'id');
+        $this->setSource('poll_options');
     }    
 
     /**

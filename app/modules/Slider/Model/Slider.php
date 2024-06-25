@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Slider extends Model
 {
-
-    public function getSource()
-    {
-        return "slider";
-    }
-
     private $id;   
     private $banner;
     private $view_title;
@@ -28,6 +22,7 @@ class Slider extends Model
 
     public function initialize()
     {
+        $this->setSource('slider');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }    
 

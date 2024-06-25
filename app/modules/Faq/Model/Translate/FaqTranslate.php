@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class FaqTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "faq_translate";
+        $this->setSource('faq_translate');
     }
 
 }

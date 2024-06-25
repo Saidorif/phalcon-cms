@@ -7,9 +7,9 @@ use Application\Mvc\Model\Translate;
 class MediaTranslate extends Translate
 {
 
-    public function getSource()
+    public function initialize()
     {
-        return "media_translate";
+        $this->setSource('media_translate');
     }
 
 } 

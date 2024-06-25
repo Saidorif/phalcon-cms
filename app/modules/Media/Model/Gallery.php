@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Gallery extends Model
 {
-
-    public function getSource()
-    {
-        return "media_gallery";
-    }
-
     private $id;
     private $media_id;
     private $file;
@@ -20,6 +14,7 @@ class Gallery extends Model
 
     public function initialize()
     {
+        $this->setSource('media_gallery');
         $this->belongsTo('media_id', 'Media\Model\Media', 'id');
     }
    

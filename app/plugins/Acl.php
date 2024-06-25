@@ -7,11 +7,11 @@
 namespace Eskiz\Plugin;
 
 use Phalcon\Mvc\Dispatcher,
-    Phalcon\Mvc\User\Plugin,
+    Phalcon\Di\Injectable,
     Phalcon\Mvc\View,
     Application\Acl\DefaultAcl;
 
-class Acl extends Plugin
+class Acl extends Injectable
 {
 
     public function __construct(DefaultAcl $acl, Dispatcher $dispatcher, View $view)
@@ -25,7 +25,7 @@ class Acl extends Plugin
         $resourceKey = $module . '/' . $controller;
         $resourceVal = $action;
 
-        if ($acl->isResource($resourceKey)) {
+        if ($acl->isComponent($resourceKey)) {
             if (!$acl->isAllowed($role, $resourceKey, $resourceVal)) {
                 $this->accessDenied($role, $resourceKey, $resourceVal, $view);
             }

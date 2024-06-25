@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class PublicationTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "publication_translate";
+        $this->setSource('publication_translate');
     }
-
 } 

@@ -6,19 +6,14 @@ use Application\Mvc\Model\Model;
 
 class KnowledgePivot extends Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return "knowledge_pivot";
+        $this->setSource('knowledge_pivot');
     }
 
     private $id;
     private $parent_id;
     private $knowledge_id;
-
-    public function initialize()
-    {
-        //
-    }
 
     public function getId()
     {

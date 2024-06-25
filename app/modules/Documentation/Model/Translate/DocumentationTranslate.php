@@ -7,9 +7,9 @@ use Application\Mvc\Model\Translate;
 class DocumentationTranslate extends Translate
 {
 
-    public function getSource()
+    public function initialize()
     {
-        return "documentation_translate";
+        $this->setSource('documentation_translate');
     }
 
 }

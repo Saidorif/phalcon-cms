@@ -2,9 +2,9 @@
 
 namespace Application\Mvc\Helper;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 
-class CmsCache extends Component
+class CmsCache extends Injectable
 {
 
     private static $instance = null;

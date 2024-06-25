@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class CategoryTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "media_category_translate";
+        $this->setSource('media_category_translate');
     }
 
 } 

@@ -13,7 +13,7 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
     {
         parent::__construct();
 
-        $this->setDefaultAction(\Phalcon\Acl::DENY);
+        $this->setDefaultAction(\Phalcon\Acl\Enum::DENY);
 
         /**
          * Full list of Roles
@@ -50,7 +50,8 @@ class DefaultAcl extends \Phalcon\Acl\Adapter\Memory
                 if (is_array($actions)) {
                     $registerActions = $actions;
                 }
-                $this->addResource(new \Phalcon\Acl\Resource($resource), $registerActions);
+                $component = new \Phalcon\Acl\Component($resource);
+                $this->addComponent($component, $registerActions);
             }
         }
 

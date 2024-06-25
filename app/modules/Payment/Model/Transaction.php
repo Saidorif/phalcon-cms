@@ -8,11 +8,7 @@ class Transaction extends Model
     public function initialize()
     {
         $this->belongsTo('order_id', 'Payment\Model\Order', 'id', ['alias' => 'transactions']);
-    }
-
-    public function getSource()
-    {
-        return "transactions";
+        $this->setSource('transactions');
     }
 
     public $id;

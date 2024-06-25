@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class MenusTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "menu_translate";
+        $this->setSource('menu_translate');
     }
 
 }

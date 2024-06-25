@@ -6,9 +6,9 @@
 
 namespace Eskiz\Plugin;
 
-use Phalcon\Mvc\User\Plugin;
+use Phalcon\Di\Injectable;
 
-class AdminLocalization extends Plugin
+class AdminLocalization extends Injectable
 {
 
     public function __construct($config)
@@ -17,8 +17,9 @@ class AdminLocalization extends Plugin
         if (!is_file($file)) {
             die("file $file not exists");
         }
+        $interpolatorFactory = new \Phalcon\Translate\InterpolatorFactory();
         $translations = include($file);
-        $this->getDI()->set('admin_translate', new \Phalcon\Translate\Adapter\NativeArray(array('content' => $translations)));
+        $this->getDI()->set('admin_translate', new \Phalcon\Translate\Adapter\NativeArray($interpolatorFactory, ['content' => $translations]));
 
     }
 

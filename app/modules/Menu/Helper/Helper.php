@@ -2,10 +2,10 @@
 
 namespace Menu\Helper;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 use Menu\Model\Menus;
 
-class Helper extends Component
+class Helper extends Injectable
 {
 
     public function menuUpperLeafs($root)

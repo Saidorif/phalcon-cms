@@ -7,9 +7,9 @@ use Phalcon\Mvc\Model\Message;
 class Settings extends \Phalcon\Mvc\Model
 {
 
-    public function getSource()
+    public function initialize()
     {
-        return 'cms_settings';
+        $this->setSource('cms_settings');
     }
 
     

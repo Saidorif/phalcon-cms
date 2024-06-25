@@ -2,7 +2,7 @@
 
 namespace Application\Widget;
 
-class AbstractWidget extends \Phalcon\Mvc\User\Component
+class AbstractWidget extends \Phalcon\Di\Injectable
 {
 
     private $module;

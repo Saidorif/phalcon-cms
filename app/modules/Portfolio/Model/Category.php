@@ -10,12 +10,6 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Category extends Model
 {
-
-    public function getSource()
-    {
-        return "portfolio_category";
-    }
-
     protected $translateModel = 'Portfolio\Model\Translate\CategoryTranslate';
 
     public $id;
@@ -26,6 +20,7 @@ class Category extends Model
     public function initialize()
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id');
+        $this->setSource('portfolio_category');
     }   
 
     public function validation()

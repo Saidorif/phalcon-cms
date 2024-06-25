@@ -163,7 +163,7 @@ class Model extends \Phalcon\Mvc\Model
             if (!$data) {
                 $data = $model->find($params);
                 if ($data) {
-                    $cache->save($this->translateCacheKey(), $data, self::CACHE_LIFETIME);
+                    $cache->set($this->translateCacheKey(), $data, self::CACHE_LIFETIME);
                 }
             }
         } else {

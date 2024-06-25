@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class ReviewsTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "reviews_translate";
+        $this->setSource('reviews_translate');
     }
-
 }

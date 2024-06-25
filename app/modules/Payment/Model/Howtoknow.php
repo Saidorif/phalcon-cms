@@ -12,11 +12,7 @@ class Howtoknow extends Model
         $this->belongsTo('member_id', 'Payment\Model\Membership', 'id', [
           'alias' => 'howtoknow'
         ]);
-    }
-
-    public function getSource()
-    {
-        return "membership_howtoknow";
+        $this->setSource('membership_howtoknow');
     }
 
     public $id;

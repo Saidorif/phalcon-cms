@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Reviews extends Model
 {
-
-    public function getSource()
-    {
-        return "reviews";
-    }
-
     private $id; 
     private $foto;
     private $title; // translate   
@@ -29,6 +23,7 @@ class Reviews extends Model
 
     public function initialize()
     {
+        $this->setSource('reviews');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
     }    
 

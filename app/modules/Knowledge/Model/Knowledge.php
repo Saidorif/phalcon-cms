@@ -6,11 +6,6 @@ use Application\Mvc\Model\Model;
 
 class Knowledge extends Model
 {
-    public function getSource()
-    {
-        return "knowledge";
-    }
-
     private $id;
     private $parent_id;
     private $slug;
@@ -28,6 +23,7 @@ class Knowledge extends Model
     
     public function initialize()
     {
+        $this->setSource('knowledge');
         $this->hasMany("id", $this->translateModel, "foreign_id"); // translate
         $this->belongsTo("parent_id", 'Knowledge\Model\Knowledge', "id",['alias' => 'parent']); // parent
         $this->hasMany("id", 'Knowledge\Model\Knowledge', "parent_id",['alias' => 'children']); // children

@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class ProductsTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "products_translate";
+        $this->setSource('products_translate');
     }
-
 } 

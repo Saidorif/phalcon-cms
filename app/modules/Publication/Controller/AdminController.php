@@ -43,7 +43,7 @@ class AdminController extends Controller
             "limit" => 20,
             "page"  => $page
         ]);
-        $this->view->paginate = $paginator->getPaginate();
+        $this->view->paginate = $paginator->paginate();
 
         $this->view->types = $types;
         $this->view->type = $type;

@@ -8,9 +8,9 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Newslist extends Model
 {
-    public function getSource()
+    public function initialize()
     {
-        return "newsletter_list";
+        $this->setSource('newsletter_list');
     }
 
     private $id;

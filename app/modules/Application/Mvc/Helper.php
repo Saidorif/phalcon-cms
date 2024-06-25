@@ -5,7 +5,7 @@ namespace Application\Mvc;
 use Application\Mvc\Router\DefaultRouter;
 use Cms\Model\Language;
 
-class Helper extends \Phalcon\Mvc\User\Component
+class Helper extends \Phalcon\Di\Injectable
 {
     const StaticBlockDefaultOptions = [
         'lifetime' => 120
@@ -24,7 +24,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     /**
      * Мультиязычный перевод строки по сайту/пользовательской_части
      */
-    public function translate($string, $placeholders = null)
+    public function translate($string, $placeholders = [])
     {
         if (!$this->translate) {
             $this->translate = $this->getDi()->get('translate');
@@ -36,7 +36,7 @@ class Helper extends \Phalcon\Mvc\User\Component
     /**
      * Мультиязычный перевод строки по админке
      */
-    public function at($string, $placeholders = null)
+    public function at($string, $placeholders = [])
     {
         if (!$this->admin_translate) {
             $this->admin_translate = $this->getDi()->get('admin_translate');

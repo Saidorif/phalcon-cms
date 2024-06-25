@@ -20,11 +20,7 @@ class Membership extends Model
         $this->hasMany('id', 'Payment\Model\Howtoknow', 'member_id', [
           'alias' => 'howtoknow'
         ]);
-    }
-
-    public function getSource()
-    {
-        return "membership";
+        $this->setSource('membership');
     }
 
     public $id;

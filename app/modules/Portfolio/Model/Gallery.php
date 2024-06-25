@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Gallery extends Model
 {
-
-    public function getSource()
-    {
-        return "portfolio_gallery";
-    }
-
     private $id;
     private $portfolio_id;
     private $file;
@@ -21,6 +15,7 @@ class Gallery extends Model
     public function initialize()
     {
         $this->belongsTo('portfolio_id', 'Portfolio\Model\Portfolio', 'id');
+        $this->setSource('portfolio_gallery');
     }
    
         

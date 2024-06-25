@@ -12,7 +12,7 @@ use Phalcon\Assets\FilterInterface;
 class Less implements FilterInterface
 {
 
-    public function filter($contents)
+    public function filter($contents): string
     {
         return $contents;
 

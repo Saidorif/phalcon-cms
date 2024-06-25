@@ -6,10 +6,9 @@ use Phalcon\Mvc\Model;
 
 class Javascript extends Model
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "cms_javascript";
+        $this->setSource('cms_javascript');
     }
 
     public $id;

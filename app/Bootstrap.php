@@ -2,6 +2,7 @@
 
 namespace Eskiz;
 use Application\Cache\Manager as CacheManager;
+use Phalcon\Url;
 
 /**
  * Bootstrap
@@ -44,7 +45,7 @@ class Bootstrap
         $this->initView($di);
 
         // URL
-        $url = new \Phalcon\Mvc\Url();
+        $url = new Url();
         $url->setBasePath($config->base_path);
         $url->setBaseUri($config->base_path);
         $di->set('url', $url);
@@ -64,7 +65,12 @@ class Bootstrap
         $this->initEventManager($di);
 
         // Session
-        $session = new \Phalcon\Session\Adapter\Files();
+        $session = new \Phalcon\Session\Manager();
+        $files = new \Phalcon\Session\Adapter\Stream([
+            'savePath' => sys_get_temp_dir(),
+        ]);
+        $session->setAdapter($files);
+        //$session->setHandler($files);
         $session->start();
         $di->set('session', $session);
 
@@ -75,7 +81,12 @@ class Bootstrap
         $this->initAssetsManager($di);
 
         // Flash helper
-        $flash = new \Phalcon\Flash\Session([
+        $customEscaper = new \Phalcon\Escaper();
+        $di->set('escaper', $customEscaper);
+
+        $sessionManager = new \Phalcon\Session\Manager();
+        $flash = new \Phalcon\Flash\Session($customEscaper, $sessionManager);
+        $flash->setCssClasses([
             'error'   => 'ui red inverted segment',
             'success' => 'ui green inverted segment',
             'notice'  => 'ui blue inverted segment',
@@ -201,7 +212,7 @@ class Bootstrap
 
         // Volt
         $volt = new \Application\Mvc\View\Engine\Volt($view, $di);
-        $volt->setOptions(['compiledPath' => APPLICATION_PATH . '/../data/cache/volt/']);
+        $volt->setOptions(['path' => APPLICATION_PATH . '/../data/cache/volt/']);
         $volt->initCompiler();
 
 
@@ -227,39 +238,21 @@ class Bootstrap
     {
         $config = $di->get('config');
 
-        $cacheFrontend = new \Phalcon\Cache\Frontend\Data([
-            "lifetime" => 60,
-            "prefix"   => HOST_HASH,
-        ]);
+        $options = [
+            'defaultSerializer' => 'Php',
+            'lifetime' => 60,
+            'storageDir' => APPLICATION_PATH . "/../data/cache/backend/"
+        ];
 
-        $cache = null;
-        switch ($config->cache) {
-            case 'file':
-                $cache = new \Phalcon\Cache\Backend\File($cacheFrontend, [
-                    "cacheDir" => APPLICATION_PATH . "/../data/cache/backend/"
-                ]);
-                break;
-            case 'memcache':
-                $cache = new \Phalcon\Cache\Backend\Memcache(
-                    $cacheFrontend, [
-                    "host" => $config->memcache->host,
-                    "port" => $config->memcache->port,
-                ]);
-                break;
-            case 'memcached':
-                $cache = new \Phalcon\Cache\Backend\Libmemcached(
-                    $cacheFrontend, [
-                    "host" => $config->memcached->host,
-                    "port" => $config->memcached->port,
-                ]);
-                break;
-        }
+        $serializerFactory = new \Phalcon\Storage\SerializerFactory();
+        $cache = new \Phalcon\Cache\Adapter\Stream($serializerFactory, $options);
+
         $di->set('cache', $cache, true);
         $di->set('modelsCache', $cache, true);
 
         \Application\Widget\Proxy::$cache = $cache; // Modules Widget System
 
-        $modelsMetadata = new \Phalcon\Mvc\Model\Metadata\Memory();
+        $modelsMetadata = new \Phalcon\Mvc\Model\MetaData\Memory();
         $di->set('modelsMetadata', $modelsMetadata);
 
         $di->set('cacheManager', new CacheManager());
@@ -269,10 +262,10 @@ class Bootstrap
     {
         $router = $di['router'];
         $router->removeExtraSlashes(true);
-        $router->handle();
+        $router->handle( $_SERVER['REQUEST_URI']);
         $view = $di['view'];
         $dispatcher = $di['dispatcher'];
-        $response = $di['response'];        
+        $response = $di['response'];
         $dispatcher->setModuleName($router->getModuleName());
         $dispatcher->setControllerName($router->getControllerName());
         $dispatcher->setActionName($router->getActionName());
@@ -282,13 +275,13 @@ class Bootstrap
         if($params){
         	if(isset($params['slug'])){
             $params = $params['slug'];
-            $lang = \Cms\Model\Language::findFirst("iso='{$params}'");        
-            if($lang){            
-                $dispatcher->setParams(array('lang'=>$lang->getIso(),'slug'=>'index')); 
+            $lang = \Cms\Model\Language::findFirst("iso='{$params}'");
+            if($lang){
+                $dispatcher->setParams(array('lang'=>$lang->getIso(),'slug'=>'index'));
                 $moduleName = \Application\Utils\ModuleName::camelize('index');
-            } 
-          }  
-        }  
+            }
+          }
+        }
 
         $ModuleClassName = $moduleName . '\Module';
         if (class_exists($ModuleClassName)) {

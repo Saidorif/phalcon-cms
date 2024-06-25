@@ -11,12 +11,6 @@ use Phalcon\Validation\Validator\Uniqueness as UniquenessValidator;
 
 class Category extends Model
 {
-
-    public function getSource()
-    {
-        return "products_category";
-    }
-
     protected $translateModel = 'Products\Model\Translate\CategoryTranslate';
 
     public $id;
@@ -42,6 +36,8 @@ class Category extends Model
         $this->belongsTo('parent_id', 'Products\Model\Category', 'id', [
             'alias' => 'parent'
         ]);
+
+        $this->setSource('products_category');
     }
 
     public function children()

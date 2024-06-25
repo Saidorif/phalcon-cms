@@ -7,12 +7,6 @@ use Application\Mvc\Model\Model;
 
 class Poll extends Model
 {
-
-    public function getSource()
-    {
-        return "poll";
-    }
-
     private $id;   
     private $title; 
     private $status; 
@@ -42,6 +36,7 @@ class Poll extends Model
                 'conditions' => 'language = "'.LANG.'"',
             ]
         ]);
+        $this->setSource('poll');
     }    
 
     public function beforeCreate()

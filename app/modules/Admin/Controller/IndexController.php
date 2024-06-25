@@ -24,7 +24,7 @@ class IndexController extends Controller
         if (!$auth || !isset($auth->admin_session) || !$auth->admin_session) {
             $this->flash->notice($this->helper->at('Log in please'));
             $this->redirect($this->url->get() . 'admin/index/login');
-        }                  
+        }
 
         $this->helper->title($this->helper->at('Welcome to Eskiz CMS'), true);
 
@@ -34,40 +34,27 @@ class IndexController extends Controller
 
     public function loginAction()
     {
-        $client_ip = $this->getIPAddress();
-         //print_r($this->getIPAddress());die;
-        $ips = [
-            '127.0.0.2',
-            '127.0.0.1',
-        ];
-        if(!in_array($client_ip,$ips)){
-            print_r($this->getIPAddress());die;
-            return $this->redirect($this->url->get() . '404');
-        }
         $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-        $guessing = $this->session->get('guessing');
-        if(!$guessing){
-            $this->session->set('guessing',[
-                'count' => 0,
-                'time' => time(),
-            ]);
-        }
-        if((int)$guessing['count'] >= 3 && ($guessing['time'] + 15) > time()){
-            $this->view->setVar('blocked',true);
-        }
-        if((int)$guessing['count'] >= 3 && ($guessing['time'] + 15) < time()){
-            $this->session->set('guessing',[
-                'count' => 0,
-                'time' => time(),
-            ]);
-        }
+//        $guessing = $this->session->get('guessing');
+//        if(!$guessing){
+//            $this->session->set('guessing',[
+//                'count' => 0,
+//                'time' => time(),
+//            ]);
+//        }
+//        if((int)$guessing['count'] >= 3 && ($guessing['time'] + 15) > time()){
+//            $this->view->setVar('blocked',true);
+//        }
+//        if((int)$guessing['count'] >= 3 && ($guessing['time'] + 15) < time()){
+//            $this->session->set('guessing',[
+//                'count' => 0,
+//                'time' => time(),
+//            ]);
+//        }
 
         $form = new LoginForm();
 
         if ($this->request->isPost()) {
-            if((int)$guessing['count'] >= 3 && ($guessing['time'] + 15) > time()){
-                return $this->redirect($this->url->get() . 'admin/index/login');
-            }
             if ($this->security->checkToken()) {
                 if ($form->isValid($this->request->getPost())) {
                     $login = $this->request->getPost('login', 'string');
@@ -83,21 +70,9 @@ class IndexController extends Controller
                                 $this->flash->error($this->helper->translate("User is not activated yet"));
                             }
                         } else {
-                            $this->session->set('guessing',[
-                                'count' => (int)$guessing['count'] + 1,
-                                'time' => time(),
-                            ]);
-                            if((int)$guessing['count'] >= 3){
-                                $this->flash->error($this->helper->translate("You are blocked for 5 minutes. Please try again later..."));
-                            }else{
-                                $this->flash->error($this->helper->translate("Incorrect login or password"));
-                            }
+                            $this->flash->error($this->helper->translate("Incorrect login or password"));
                         }
                     } else {
-                        $this->session->set('guessing',[
-                            'count' => (int)$guessing['count'] + 1,
-                            'time' => time(),
-                        ]);
                         $this->flash->error($this->helper->translate("Incorrect login or password"));
                     }
                 } else {
@@ -106,10 +81,7 @@ class IndexController extends Controller
                     }
                 }
             } else {
-                $this->session->set('guessing',[
-                    'count' => (int)$guessing['count'] + 1,
-                    'time' => time(),
-                ]);
+                die('Security errors');
                 $this->flash->error($this->helper->translate("Security errors"));
             }
         }
@@ -132,17 +104,16 @@ class IndexController extends Controller
         $this->redirect($this->url->get());
     }
 
-    private function getIPAddress() {
+    private function getIPAddress()
+    {
         //whether ip is from the share internet
-        if(!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        }
-        //whether ip is from the proxy
+        } //whether ip is from the proxy
         elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        //whether ip is from the remote address
-        else{
+        } //whether ip is from the remote address
+        else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
         return $ip;

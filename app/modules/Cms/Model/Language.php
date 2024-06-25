@@ -11,10 +11,9 @@ use Phalcon\Validation\Validator\PresenceOf;
 
 class Language extends Model
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "language";
+        $this->setSource('language');
     }
 
     public $id;

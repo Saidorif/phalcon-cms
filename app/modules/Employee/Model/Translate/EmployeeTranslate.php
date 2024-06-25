@@ -6,10 +6,9 @@ use Application\Mvc\Model\Translate;
 
 class EmployeeTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "employee_translate";
+        $this->setSource('employee_translate');
     }
 
 }

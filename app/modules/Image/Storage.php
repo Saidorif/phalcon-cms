@@ -2,7 +2,7 @@
 
 namespace Image;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 
 define('IMG_ROOT_REL_PATH', 'files');
 define('DIR_SEP', '/');

@@ -17,7 +17,6 @@
 </head>
 <body class="login">
     <div class="section">
-        {% if blocked is not defined %}
         <form class="ui form segment" method="post" action="{{ url.get() }}admin/index/login">
             <div class="eskiz_logo"></div>
             {{ flash.output() }}
@@ -46,11 +45,6 @@
                 <a href="/" class="goto_website positive">Перейти к сайту</a>
             </div>
         </form>
-        {% else %}
-            <div class="ui form segment">
-                <p>{{ helper.translate('Please wait for 5 minutes and try again. You are blocked') }}</p>
-            </div>
-        {% endif %}
     </div>
 </body>
 </html>

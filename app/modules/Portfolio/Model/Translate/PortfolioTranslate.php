@@ -6,10 +6,8 @@ use Application\Mvc\Model\Translate;
 
 class PortfolioTranslate extends Translate
 {
-
-    public function getSource()
+    public function initialize()
     {
-        return "portfolio_translate";
+        $this->setSource('portfolio_translate');
     }
-
 } 

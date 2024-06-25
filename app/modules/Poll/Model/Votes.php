@@ -6,13 +6,6 @@ use Application\Mvc\Model\Model;
 
 class Votes extends Model
 {
-
-    public function getSource()
-    {
-        return "poll_votes";
-    }
-   
-
     public $id;
     public $poll_id;
     public $vote; 
@@ -21,6 +14,7 @@ class Votes extends Model
     public function initialize()
     {
         $this->belongsTo('poll_id', 'Poll\Model\Poll', 'id');
+        $this->setSource('poll_votes');
     }    
 
     /**

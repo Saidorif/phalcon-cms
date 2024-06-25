@@ -10,12 +10,6 @@ use Application\Localization\Transliterator;
 
 class Products extends Model
 {
-
-    public function getSource()
-    {
-        return "products";
-    }
-
     public function initialize()
     {
         $this->hasMany('id', $this->translateModel, 'foreign_id'); 
@@ -35,6 +29,7 @@ class Products extends Model
         $this->belongsTo('category_id', 'Products\Model\Category', 'id', [
             'alias' => 'category'
         ]);
+        $this->setSource('products');
     }
 
     private $id;

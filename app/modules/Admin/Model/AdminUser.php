@@ -9,11 +9,6 @@ use stdClass;
 class AdminUser extends \Phalcon\Mvc\Model
 {
 
-    public function getSource()
-    {
-        return "admin_user";
-    }
-
     public $id;
     public $role;
     public $login;
@@ -30,7 +25,7 @@ class AdminUser extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        
+        $this->setSource('admin_user');
     }
 
     public function setCheckboxes($post)

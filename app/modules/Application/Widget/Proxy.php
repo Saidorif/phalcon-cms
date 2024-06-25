@@ -2,7 +2,7 @@
 
 namespace Application\Widget;
 
-class Proxy extends \Phalcon\Mvc\User\Component
+class Proxy extends \Phalcon\Di\Injectable
 {
 
     const NULLCACHE = 'NULLCACHE';

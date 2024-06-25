@@ -5,10 +5,10 @@ return [
 
     'database'  => [
         'adapter'  => 'Mysql',
-        'host'     => 'localhost',
+        'host'     => 'db',
         'username' => 'root',
-        'password' => '',
-        'dbname'   => 'cms.loc',
+        'password' => 'very_secret',
+        'dbname'   => 'phalcon-cms',
         'charset'  => 'utf8',
     ],
 
